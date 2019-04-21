@@ -18,6 +18,18 @@ class TodoApp extends React.Component{
     this.state = {items:[],text:''}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(key){
+    let {items} = this.state;
+    curtext:'adb';
+    items = items.filter((key) => {
+      return key !== curtext
+    });
+    this.setState({
+      items: items
+    });
   }
 
   handleChange(event){
@@ -51,7 +63,9 @@ class TodoApp extends React.Component{
           <button type="submit">
           ADD#{this.state.items.length + 1}
           </button>
-          <TodoList items = {this.state.items}/> 
+          <TodoList items = {this.state.items} 
+           handleDelete = {this.handleDelete.bind(this,key)}
+          /> 
         </form>     
       </div>
     );
@@ -64,8 +78,10 @@ class TodoList extends React.Component{
   render(){
     return(
       <ul>
-        {this.props.items.map(item =>(
-        <li key = {item.id}>{item.text}</li>
+        {this.props.items.map(items =>(
+        <li key = {items.id}
+            onClick = {items.handleDelete}
+        >{items.text}</li>
       ))}
       </ul>
     );
