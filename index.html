@@ -80,7 +80,7 @@ class TodoList extends React.Component{
       <ul>
         {this.props.items.map(items =>(
         <li key = {items.id}
-            onClick = {items.handleDelete}
+            onClick = {(items) => items.handleDelete(items.id)}
         >{items.text}</li>
       ))}
       </ul>
