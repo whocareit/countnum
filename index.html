@@ -21,10 +21,12 @@ class TodoApp extends React.Component{
     this.handleDelete = this.handleDelete.bind(this); // 绑定过一次this下面不用绑 而且下面那样绑定也会出错
   }
 //传入该点击事件的id，id用的new Date()的数值，使用filter()方法，如果id不为空，就返回一个新的数组
-  handleDelete(key){
+  handleDelete(id){
     let {items} = this.state;
     items = items.filter((item) => {
-      return item.id !== key
+      console.log(item.id)
+      console.log(id)
+      return item.id !== id
     })
     this.setState({
       items: items
@@ -64,6 +66,7 @@ class TodoApp extends React.Component{
           ADD#{this.state.items.length + 1}
           </button>
           <TodoList items = {this.state.items} 
+                    id = {this.state.items.id}
            handleDelete = {this.handleDelete}
           /> 
         </form>     
@@ -80,7 +83,7 @@ class TodoList extends React.Component{
       <ul>
         {this.props.items.map(items =>(
         <li key = {items.id}
-            onClick = {(items) => this.props.handleDelete(items.key)} // 利用闭包的特性来传参
+            onClick = {() => this.props.handleDelete(items.id)} // 利用闭包的特性来传参
         >{items.text}</li>
       ))}
       </ul>
