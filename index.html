@@ -23,8 +23,8 @@ class TodoApp extends React.Component{
 //传入该点击事件的id，id用的new Date()的数值，使用filter()方法，如果id不为空，就返回一个新的数组
   handleDelete(key){
     let {items} = this.state;
-    items = items.filter(() => {
-      return items.id !== key
+    items = items.filter((item) => {
+      return item.id !== key
     })
     this.setState({
       items: items
